@@ -1,0 +1,69 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+	<context-param>
+	<param-name>contextConfigLocation</param-name>
+		<param-value>
+			classpath:applicationContext.xml
+		</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+    <servlet>
+        <servlet-name>springmvc</servlet-name>
+        <servlet-class>
+            org.springframework.web.servlet.DispatcherServlet
+        </servlet-class>
+	    <init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:springmvc-config.xml</param-value>
+		</init-param>
+        <load-on-startup>1</load-on-startup>    
+	</servlet>
+
+    <servlet-mapping>
+        <servlet-name>springmvc</servlet-name>
+        <url-pattern>*.action</url-pattern>
+    </servlet-mapping>
+
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+      <servlet-name>XmlRpcServer</servlet-name>
+      <servlet-class>com.tianjunwei.rpc.XmlRpcServicesServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+     <servlet-name>XmlRpcServer</servlet-name>
+      <url-pattern>/HelloHandler</url-pattern>
+  </servlet-mapping>
+  
+  
+  <servlet>
+         <servlet-name>hessian-service</servlet-name>
+         <servlet-class>
+             com.caucho.hessian.server.HessianServlet
+         </servlet-class>
+         <init-param>            
+             <param-name>home-class</param-name>            
+             <param-value>
+                 <!-- 服务实现类 -->
+                 com.tianjunwei.hessian.server.HelloServiceImpl
+             </param-value>
+         </init-param>
+         <init-param>            
+             <param-name>home-api</param-name>
+            <!-- 服务接口 -->
+             <param-value>com.tianjunwei.hessian.server.HelloService</param-value>
+         </init-param>
+ 
+     </servlet>
+ 
+     <servlet-mapping>
+         <servlet-name>hessian-service</servlet-name>
+         <url-pattern>/hessian</url-pattern>
+         </servlet-mapping>
+</web-app>
