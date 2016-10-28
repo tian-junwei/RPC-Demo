@@ -8,24 +8,31 @@ import java.lang.reflect.Method;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.ConcurrentHashMap;
-
+/**
+ * 服务端
+ * @author tianjunwei
+ */
 public class RPCServer {
 
 	public static ConcurrentHashMap<String, Object> classMap = new ConcurrentHashMap<String,Object>();
 	
+	public static void main(String [] args) throws Exception{
+		System.err.println("server start");
+		RPCServer.invoker(8080);
+	}
 	public static void invoker(int port) throws Exception{
 		
 		ServerSocket server = new ServerSocket(port);
 		for(;;){
 				try{
 					final Socket socket = server.accept();
-					ObjectOutputStream output = new ObjectOutputStream(socket.getOutputStream());  
 					new Thread(new Runnable() {
-						
+						ObjectOutputStream output =  null;
 						@Override
 						public void run() {
 							try{
 								try {
+									output = new ObjectOutputStream(socket.getOutputStream()); 
 									ObjectInputStream input = new ObjectInputStream(socket.getInputStream());
 									String className = input.readUTF();
 									String methodName = input.readUTF();
@@ -49,10 +56,15 @@ public class RPCServer {
 									output.writeObject(e);
 								}finally {
 									output.close();
-									socket.close();
 								}
 							}catch(Exception e){
 								e.printStackTrace();
+							}finally {
+								try {
+									socket.close();
+								} catch (IOException e) {
+									e.printStackTrace();
+								}
 							}
 						}
 					}).start();
