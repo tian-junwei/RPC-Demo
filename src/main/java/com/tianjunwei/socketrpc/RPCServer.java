@@ -20,6 +20,7 @@ public class RPCServer {
 		System.err.println("server start");
 		RPCServer.invoker(8080);
 	}
+	@SuppressWarnings("resource")
 	public static void invoker(int port) throws Exception{
 		
 		ServerSocket server = new ServerSocket(port);
