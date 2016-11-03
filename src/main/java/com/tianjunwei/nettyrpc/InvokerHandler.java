@@ -14,6 +14,7 @@ public class InvokerHandler extends ChannelInboundHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {  
         ClassInfo classInfo = (ClassInfo)msg;
         Object claszz = null;
+        //用于记录反射获得类，这样可以提高性能
 		if(!classMap.containsKey(classInfo.getClassName())){
 			try {
 				claszz = Class.forName(classInfo.getClassName()).newInstance();
