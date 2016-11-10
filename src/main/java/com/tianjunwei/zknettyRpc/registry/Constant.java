@@ -1,9 +1,6 @@
 package com.tianjunwei.zknettyRpc.registry;
 
-/**
- * 
- * @author tianjunwei
- */
+
 public interface Constant {
 
     int ZK_SESSION_TIMEOUT = 5000;
