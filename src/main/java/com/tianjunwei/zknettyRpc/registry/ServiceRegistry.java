@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package com.tianjunwei.zknettyRpc.registry;
 
 import java.io.IOException;
@@ -11,13 +14,9 @@ import org.apache.zookeeper.ZooKeeper;
 import org.apache.zookeeper.data.Stat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import sun.rmi.runtime.Log;
 
 /**
- * 服务注册
- *
- * @author huangyong
- * @author luxiaoxun
+ * 
  */
 public class ServiceRegistry {
 
