@@ -9,11 +9,11 @@
 
     <context:property-placeholder location="classpath:rpc.properties"/>
 
-    <bean id="serviceDiscovery" class="com.nettyrpc.registry.ServiceDiscovery">
-        <constructor-arg name="registryAddress" value="${registry.address}"/>
+    <bean id="serviceDiscovery" class="com.tianjunwei.zknettyRpc.registry.ServiceDiscovery">
+        <constructor-arg name="registryAddress" value="127.0.0.1:2181"/>
     </bean>
 
-    <bean id="rpcClient" class="com.nettyrpc.client.RpcClient">
+    <bean id="rpcClient" class="com.tianjunwei.zknettyRpc.client.RpcClient">
         <constructor-arg name="serviceDiscovery" ref="serviceDiscovery"/>
     </bean>
 
